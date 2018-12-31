@@ -6,6 +6,7 @@
 * [Expressions](#expressions)
     * [Bindings](#bindings)
     * [Functions](#functions)
+* Objects and Arrays (#object-and-arrays)
 
 
 * [Async/await](https://javascript.info/async-await)
@@ -84,6 +85,23 @@ switch this throw true try typeof var void while with yield
 * functions can be treated as values
 * local bindings are re-created everytime a function is called.
 * Being able to reference a specific instance of a local binding in an enclosing scope—is called `closure`. A function that references bindings from local scopes around it is called a closure. 
+* The `function` keyword, when used as an expression, can create a function value.  When used as a statement, it can be used to declare a binding and give it a function as its value.
+
+```javascript
+//Define f to hold a function value
+const f = function(a) {
+  console.log(a + 2)
+}
+
+//Declare g to be a function
+function g(a,b) "
+return a * b * 3.5
+
+//A less verbose function value
+const f = () => {}
+let h = a => a % 3
+```
+
 
 ```javascript
 function wrapValue(n) {
@@ -153,6 +171,31 @@ do {
 ```
 #### For Loop
 The parentheses after a for keyword must contain two semicolons. The part before the first semicolon initializes the loop, usually by defining a binding. The second part is the expression that checks whether the loop must continue. The final part updates the state of the loop after every iteration. In most cases, this is shorter and clearer than a while construct.
+
+Steps to create a loop:
+1. Initialize the loop
+2. Write expression that checks if the loop must continue
+3. third party updates the state of the loop after every iteration
+```javascript
+for (let line = "#"; line.length < 8; line += "#") {
+  console.log(line)
+}
+
+function printFarmInventory(cows, chickens) {
+  let cowString = String(cows)
+  while(cowString.length < 3) {
+    cowString = "0" + cowString
+  }
+  console.log(`${cowString} Cows`)
+
+  let chickenString = String(chicken)
+  while(chickenString.length < 3) {
+    chickenString = "0" + chickenString
+  }
+  console.log(chickenString)
+}
+```
+
 ```javascript
 for ( let number = 0; number < 10; number = number + 2){
   console.log(number)
@@ -198,6 +241,27 @@ for(let line = "#"; line.length < 8; line++) {
 * conditional (if, else, and switch) and looping (while, do, and for) statements.
 * Bindings can be used to file pieces of data under a name, and they are useful for tracking state in your program. The environment is the set of bindings that are defined. JavaScript systems always put a number of useful standard bindings into your environment.
 * Functions are special values that encapsulate a piece of program. You can invoke them by writing functionName(argument1, argument2). Such a function call is an expression and may produce a value.
+* JavaScript statemet corresponds to a full sentence.  A statement stands on its own.
+
+String.length - access the length property of the value in string.
+
+Almost all of the JS values have properties.  The exceptions are null and undefined.
+
+Two main ways to access properties is through a dot (.) and [] - value.x and value[x].  When using dot, the word after the dot is the literal name of the property.
+
+When using [], the expression between [] is evaluated to get the property name.
+
+Property names are strings.
+
+Numbers, Strings and Booleans are immutable (impossible to change value of that type).
+
+
+#### Expression
+* a fragment of code that produces a value.
+* every value that is written literally is an expression
+* expressions can contain other expressions
+
+
 
 ### Call Stack
 The place where the computer stores this context is the call stack. Every time a function is called, the current context is stored on top of this stack. When a function returns, it removes the top context from the stack and uses that context to continue execution.
@@ -222,4 +286,97 @@ onChange = {
 
 onChange = {(e) => console.log(e.target.value)}
 
+//initialize a state object
+state = {}
+```
+Callback function - a function that accepts up to 3 arguments.  The map method calls the callback function one time for each element in the array.  It calls a defined callback function on each element of an array, and returns an array that contains the results.
+* @param callbackfn - a function 
+* @param thisArg - An object to which the `this` keyword can refer in the callback function.  It `thisArg` is omitted, undefined is used as the `this` value.
+### Bind
+* an object to which the `this` keyword can refer inside the new function.  For a given function, creates a bound function that has the same body as the original function.  The `this` object of the bound function is associated with the specified object, and has the specified initial parameters.  
+* @param thisArg - An object to which the `this` keyword can refer inside the new function.
+* @param argArray - A list of arguments to be passed to the new function.
+
+## Objects and Arrays
+* Objects can change their properties, causing a single object value to have different content at different times.
+* Objects can have the same identity.
+* You can use a `let` binding to keep track of a changing number by changing the value the binding points to.
+* `const` binding to an object can itself not be changed and will continue to point at the same object, the contents of that object might change.
+* Bindings can be changeable or constant, this is separate from the way their values behave.
+`let journal = []`
+```javascript
+function addEntry(events, squirrel) {
+  journal.push([events, squirrel])
+}
+```
+* if a property name is a brace notation isn't followed by a value, its value is taken from the binding with the same name.
+* Arrays have an `includes` method that checks whether a given value exists in the array.
+```javascript
+for (let i = 0; i < journal.length; i++){
+  let entry = Journal[i]
+}
+```
+* this loop is going over arrays one element at a time - run a counter over the length of the array and pick out each element in turn.
+* Same loop in modern JS:
+```javascript
+for (let entry of Journal) {
+  console.log(`${entry.events.length} events`)
+}
+```
+* for loop will loop over the elements of the value given after `of`.
+* Find every type of event in the data set:
+```javascript
+function journalEvents(journal) {
+  let events = []
+  for(let entry of journal) {
+    for(let event of entry.events) {
+      if(!events.includes(event)) {
+        event.push(event)
+      }
+    }
+  }
+  return events
+}
+console.log(journalEvents(Journal))
+```
+* push - add elements at the end of an array
+* pop - remove elements at the end of an array
+* unshift - adding things at the start of an array
+* shift - removing things at the start of an array
+
+
+#### Correlation
+* Correalation is a measure of dependence between statistical variables.  It is expressed as a value that ranges from -1 to 1.  Zero correlation means that the variables are not related.
+* A correlation of one indicates that the two are perfectly related.
+* Negative one also means that the variables are perfectly related but that they are opposites, where one is true, the other is false.
+* To compute the measure of correlation between two Boolean variables, we can use the phi coefficent.  This is a formula whose input is a frequency table containing the number of times different combinations of the variables were observed.  
+* phi = n11*n00 - n10*n01 / math.sqrt (n1*n0*n1*n0)
+* notation n01 indicates the number of measurements where the first variable is false and the second variable is true.
+* n1 - refers to the sum of all measurements where the first variable is true.
+* n0 - refers to the sum of all measurements where the second variable is false.
+
+##### Correlation Table in code
+```javascript
+function phi(table) {
+  return (table[3] * table[0] - table[2] * table[1])/
+          Math.sqrt((table[2] + table[3]) *
+                    (table[0] + table[1]) *
+                    (table[1] + table[3]) * 
+                    (table[0] + table[2]))
+}
+console.log(phi([76, 9, 4, 1]))
+```
+##
+```javascript
+function tableFor(event, journal) {
+  let table = [0, 0, 0, 0]
+  for(let i = 0; i < journal.length; i++) {
+    let entry = journal[i], index = 0
+    if(entry.events.includes(event)) index += 1
+    if(entry.squirrel) index += 2
+    table[index] += 1
+  }
+  return table
+}
+console.log(tableFor("pizza", JOURNAL))
 ```
