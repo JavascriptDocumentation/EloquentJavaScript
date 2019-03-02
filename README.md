@@ -380,3 +380,15 @@ function tableFor(event, journal) {
 }
 console.log(tableFor("pizza", JOURNAL))
 ```
+// Define f to hold a function value
+const f = funtion(a) {
+    console.log(a + 2)
+}
+
+let f1 = a => a + 2
+
+//declare g to be a function
+function g(a, b) {
+    return a * b * 3.5;
+}
+
