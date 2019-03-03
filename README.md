@@ -380,6 +380,7 @@ function tableFor(event, journal) {
 }
 console.log(tableFor("pizza", JOURNAL))
 ```
+```javascript
 // Define f to hold a function value
 const f = funtion(a) {
     console.log(a + 2)
@@ -391,4 +392,21 @@ let f1 = a => a + 2
 function g(a, b) {
     return a * b * 3.5;
 }
+```
+### JSON
+Objects and arrays (which are a specific kind of object) provide ways to group several values into a single value. Conceptually, this allows us to put a bunch of related things in a bag and run around with the bag, instead of wrapping our arms around all of the individual things and trying to hold on to them separately.
 
+Most values in JavaScript have properties, the exceptions being null and undefined. Properties are accessed using value.prop or value["prop"]. Objects tend to use names for their properties and store more or less a fixed set of them. Arrays, on the other hand, usually contain varying amounts of conceptually identical values and use numbers (starting from 0) as the names of their properties.
+
+There are some named properties in arrays, such as length and a number of methods. Methods are functions that live in properties and (usually) act on the value they are a property of.
+
+You can iterate over arrays using a special kind of for loop—for (let element of array).
+
+* properties only grasp their value, rather than contain it
+* objects and arrays are stored in the computer's memory as sequences of bits holding the addresses (the place in memory) of their contents.
+* an array with another array inside inside of it consists of at least one memory region for the inner array, and another for the outer array, containing a binary number that represents the position of the inner array.
+* convert tangles of memory addresses to a description that can be stored or sent
+* serialize the data - it is converted into a flat description
+* JSON - used as a data storage and communication format on the web
+* JSON.stringify - convert data to JSON
+* JSON.parse - convert data from JSON
