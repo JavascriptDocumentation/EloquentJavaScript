@@ -40,3 +40,42 @@ repeat(5, i => {
     labels.push(`Unit ${i + 1}`);
 });
 console.log(labels);
+//
+function greaterThan(n) {
+    return m => m > n;
+}
+let greaterThan10 = greaterThan(10);
+console.log(greaterThan10(11));
+//
+function filter(array, test) {
+    let passed = [];
+    for (let element of array) {
+        if (test(element)) {
+            passed.push(element);
+        }
+    }
+    return passed;
+}
+
+console.log(filter(SCRIPTS, script => script.living));
+//
+function promptDirection(question) {
+    let result = prompt(question);
+    if (result.toLowerCase() == "left") return "L";
+    if (result.toLowerCase() == "right") return "R";
+    throw new Error("Invalid direction: " + result);
+}
+
+function look() {
+    if (promptDirection("Which way?") == "L") {
+        return "a house";
+    } else {
+        return "two angry birds";
+    }
+}
+
+try {
+    console.log("You see", look());
+} catch (error) {
+    console.log("Something went wrong: " + error);
+}

@@ -410,3 +410,58 @@ You can iterate over arrays using a special kind of for loop—for (let element 
 * JSON - used as a data storage and communication format on the web
 * JSON.stringify - convert data to JSON
 * JSON.parse - convert data from JSON
+
+### Higher-order Functions
+Arrays provide a number of useful higher-order methods. You can use forEach to loop over the elements in an array. The filter method returns a new array containing only the elements that pass the predicate function. Transforming an array by putting each element through a function is done with map. You can use reduce to combine all the elements in an array into a single value. The some method tests whether any element matches a given predicate function. And findIndex finds the position of the first element that matches a predicate.
+### Objects
+So objects do more than just hold their own properties. They have prototypes, which are other objects. They’ll act as if they have properties they don’t have as long as their prototype has that property. Simple objects have Object.prototype as their prototype.
+
+Constructors, which are functions whose names usually start with a capital letter, can be used with the new operator to create new objects. The new object’s prototype will be the object found in the prototype property of the constructor. You can make good use of this by putting the properties that all values of a given type share into their prototype. There’s a class notation that provides a clear way to define a constructor and its prototype.
+
+You can define getters and setters to secretly call methods every time an object’s property is accessed. Static methods are methods stored in a class’s constructor, rather than its prototype.
+
+The instanceof operator can, given an object and a constructor, tell you whether that object is an instance of that constructor.
+
+One useful thing to do with objects is to specify an interface for them and tell everybody that they are supposed to talk to your object only through that interface. The rest of the details that make up your object are now encapsulated, hidden behind the interface.
+
+More than one type may implement the same interface. Code written to use an interface automatically knows how to work with any number of different objects that provide the interface. This is called polymorphism.
+
+When implementing multiple classes that differ in only some details, it can be helpful to write the new classes as subclasses of an existing class, inheriting part of its behavior.
+### Encapsulation
+* underscore (_) character at the start of property names to indicate that those properties are private.
+* Separating interface from implementation is a great idea. It is usually called encapsulation.
+### Methods
+* Methods are properties that hold function values
+* Usually a method needs to do something with the object it was called on.  When a function is called as a method—looked up as a property and immediately called, as in `object.method()` — the binding called `this` in its body automatically points at the object that it was called on.
+### Prototypes
+* In addition to their set of properties, most objects also have a prototype. 
+* A prototype is another object that is used as a fallback source of properties. 
+*  When an object gets a request for a property that it does not have, its prototype will be searched for the property, then the prototype’s prototype
+* the entity behind almost all objects, Object.prototype
+* `Object.getPrototypeOf` returns the prototype of an object.
+### Classes
+ A class defines the shape of a type of object—what methods and properties it has. Such an object is called an instance of the class.
+
+Prototypes are useful for defining properties for which all instances of a class share the same value, such as methods. Properties that differ per instance, such as our rabbits’ type property, need to be stored directly in the objects themselves.
+
+So to create an instance of a given class, you have to make an object that derives from the proper prototype, but you also have to make sure it, itself, has the properties that instances of this class are supposed to have. This is what a constructor function does.
+```javascript
+function makeRabbit(type) {
+  let rabbit = Object.create(protoRabbit);
+  rabbit.type = type;
+  return rabbit;
+}
+```
+
+It is important to understand the distinction between the way a prototype is associated with a constructor (through its prototype property) and the way objects have a prototype (which can be found with Object.getPrototypeOf). The actual prototype of a constructor is Function.prototype since constructors are functions. Its prototype property holds the prototype used for instances created through it.
+
+* JavaScript classes are constructor functions with a prototype property.
+### Maps
+There are two uses of Map keyword:
+* `map` used for an operation that transforms a data structure by applying a function to its elements.
+* `Map` - a data structure that associated values (the keys) with other values.
+* The methods `set`, `get`, and `has` are part of the interface of the Map object. 
+### Getters, Setters and Statics
+* Inside a class declaration, methods that have static written before their name are stored on the constructor. 
+### Bugs and Errors
+* "use strict" at the top of your program rarely hurts and might help you spot a problem.
